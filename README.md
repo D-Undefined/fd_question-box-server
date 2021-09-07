@@ -4,6 +4,8 @@
 
 ## API ドキュメント
 
+https://d-undefined.github.io/fd_question-box-server/
+
 Swagger を github pages でホスティングしています。
 
 ### 更新方法
