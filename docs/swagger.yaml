@@ -11,13 +11,13 @@ tags:
     description: 回答系API
 
 paths:
-  /quesions/{quetion_id}:
+  /questions/{question_id}:
     get:
       summary: ID指定での質問の取得
       tags:
         - question
       parameters:
-        - name: quetion_id
+        - name: question_id
           in: path
           required: true
           schema:
@@ -35,7 +35,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BadRequest"
-  /quesions:
+  /questions:
     get:
       summary: 質問一覧の取得
       tags:
@@ -46,7 +46,7 @@ paths:
           schema:
             type: integer
             description: ページネーションで10件ずつ返します
-        - name: is_answerd
+        - name: is_answered
           in: query
           schema:
             type: boolean
@@ -119,7 +119,7 @@ components:
         id:
           type: integer
           example: 1
-        contnent:
+        content:
           type: string
           example: "質問の内容"
         is_answered:
@@ -131,7 +131,7 @@ components:
         id:
           type: integer
           example: 1
-        contnent:
+        content:
           type: string
           example: "質問の内容"
         is_answered:
@@ -160,7 +160,7 @@ components:
         answer_id:
           type: integer
           example: 1
-        contnent:
+        content:
           type: string
           example: "回答の内容"
     BadRequest:
