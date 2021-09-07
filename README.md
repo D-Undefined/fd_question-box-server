@@ -17,7 +17,5 @@ npm install -g redoc-cli
 ```
 
 ```
-$ cd docs
-
-$ redoc-cli bundle swagger.yaml
+$ redoc-cli bundle docs/swagger.yaml -o docs/index.html
 ```

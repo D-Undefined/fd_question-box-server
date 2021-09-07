@@ -13,7 +13,7 @@ tags:
 paths:
   /quesions/{quetion_id}:
     get:
-      summary: 質問の取得
+      summary: ID指定での質問の取得
       tags:
         - question
       parameters:
@@ -37,7 +37,7 @@ paths:
                 $ref: "#/components/schemas/BadRequest"
   /quesions:
     get:
-      summary: 質問を取得
+      summary: 質問一覧の取得
       tags:
         - question
       parameters:
