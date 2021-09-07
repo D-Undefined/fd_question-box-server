@@ -1,0 +1,171 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: fd_question-box
+  description: ふくちゃんの質問箱
+
+tags:
+  - name: question
+    description: 質問系API
+  - name: answer
+    description: 回答系API
+
+paths:
+  /quesions/{quetion_id}:
+    get:
+      summary: 質問の取得
+      tags:
+        - question
+      parameters:
+        - name: quetion_id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionWithAnswer"
+        400:
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+  /quesions:
+    get:
+      summary: 質問を取得
+      tags:
+        - question
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            description: ページネーションで10件ずつ返します
+        - name: is_answerd
+          in: query
+          schema:
+            type: boolean
+            example: true
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuestionContent"
+        400:
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+
+    post:
+      summary: 質問の作成
+      tags:
+        - question
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostQuestion"
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionContent"
+        400:
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+
+  /answer:
+    put:
+      summary: 回答の登録
+      tags:
+        - answer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutAnswer"
+      responses:
+        200:
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnswerContent"
+
+components:
+  schemas:
+    id:
+      type: integer
+      description: 質問のID
+    QuestionContent:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        contnent:
+          type: string
+          example: "質問の内容"
+        is_answered:
+          type: boolean
+          example: false
+    QuestionWithAnswer:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        contnent:
+          type: string
+          example: "質問の内容"
+        is_answered:
+          type: boolean
+          example: false
+        answer:
+          $ref: "#/components/schemas/AnswerContent"
+    PostQuestion:
+      type: object
+      properties:
+        content:
+          type: string
+          example: "質問の内容"
+    PutAnswer:
+      type: object
+      properties:
+        question_id:
+          type: integer
+          example: "質問のID"
+        content:
+          type: string
+          example: "回答の内容"
+    AnswerContent:
+      type: object
+      properties:
+        answer_id:
+          type: integer
+          example: 1
+        contnent:
+          type: string
+          example: "回答の内容"
+    BadRequest:
+      type: object
+      properties:
+        400:
+          type: string
+          example: "リクエストが不正です"
