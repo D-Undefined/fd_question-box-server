@@ -2,6 +2,12 @@
 
 福ちゃんの質問箱のサーバーサイド
 
+## セットアップ
+
+```
+$ docker-compouse up
+```
+
 ## API ドキュメント
 
 https://d-undefined.github.io/fd_question-box-server/
@@ -10,7 +16,7 @@ Swagger を github pages でホスティングしています。
 
 ### 更新方法
 
-### ReDoc のインストール
+#### ReDoc のインストール
 
 ```
 npm install -g redoc-cli
