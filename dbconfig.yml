@@ -1,0 +1,6 @@
+development:
+  dialect: postgres
+  dir: postgres/migrations
+  datasource: host=172.19.0.1 port=5432 dbname=db user=admin password=pass sslmode=disable
+  # datasource: port=postgres dbname=db user=postgres password=pass sslmode=disable
+  table: migrations
