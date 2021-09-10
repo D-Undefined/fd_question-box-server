@@ -31,6 +31,7 @@ func main() {
 	v1 := e.Group("/api/v1")
 
 	v1.POST("/questions", qH.PostQuestion)
+	v1.GET("/questions/:id", qH.GetQuestionByID)
   
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))

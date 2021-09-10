@@ -9,6 +9,7 @@ import (
 
 type QuestionUC interface {
 	Create(*entity.Question) (*entity.Question, error)
+	GetByID(int) (*entity.Question, error)
 }
 
 type questionUC struct {
@@ -26,4 +27,8 @@ func (uc *questionUC) Create(question *entity.Question) (*entity.Question, error
 		return nil, fmt.Errorf("questionRepo CreateQuestion: %v", err)
 	}
 	return question, nil
+}
+
+func (uc *questionUC) GetByID(id int) (*entity.Question, error) {
+	return uc.questionRepo.GetByID(id)
 }

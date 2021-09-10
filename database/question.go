@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/kazuki-komori/fd_question-box-server/domain/entity"
@@ -21,4 +22,17 @@ func (qR *QuetionRepository) CreateQuestion(question *entity.Question) (err erro
 	db := qR.SqlHandler.db
 	question.CreatedAt = time.Now().Unix()
 	return db.Create(&question).Error
+}
+
+// 質問を取得
+func (qR *QuetionRepository) GetByID(id int) (*entity.Question, error) {
+	db := qR.SqlHandler.db
+	dto := new(entity.Question)
+	dto.ID = id
+	err := db.Preload("Answer").First(dto).Error
+	if err != nil {
+		fmt.Printf("%v", err)
+		return nil, err
+	}
+	return dto, nil
 }

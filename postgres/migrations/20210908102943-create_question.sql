@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS answers (
     created_at INTEGER NOT NULL
 );
 -- +migrate Down
-DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS questions;

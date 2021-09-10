@@ -16,4 +16,4 @@ EXPOSE 8080
 
 RUN go get -u github.com/cosmtrek/air
 
-CMD ["air"]
+# CMD ["air"]
