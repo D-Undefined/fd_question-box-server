@@ -53,7 +53,7 @@ func (qH *questionHandler)GetQuestionByID(c echo.Context) (err error) {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, APIError{Message: "サーバーでエラーが発生しました"})
 	}
-	if e.IsAnswerd == false {
+	if !e.IsAnswerd {
 		dto := entity.QuestionDTO{
 			ID: e.ID,
 			Content: e.Content,
@@ -66,7 +66,6 @@ func (qH *questionHandler)GetQuestionByID(c echo.Context) (err error) {
 }
 
 // GET /questions 質問を全件取得
-
 func (qH *questionHandler)GetQuestionAll(c echo.Context) (err error) {
 	e, err := qH.questionUC.FindAll()
 	if err != nil {

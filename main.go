@@ -14,9 +14,13 @@ func main() {
 
 	db, _ := database.NewDB()
 	qR := database.NewQuestionRepository(*db)
+	aR := database.NewAnswerRepository(*db)
+	
 	qU := usecase.NewQuestionUC(qR)
+	aU := usecase.NewAnswerUC(aR)
 
 	qH := handler.NewQuestionHandler(qU)
+	aH := handler.NewAnswerHandler(aU)
 
 	// Echo instance
 	e := echo.New()
@@ -33,6 +37,8 @@ func main() {
 	v1.POST("/questions", qH.PostQuestion)
 	v1.GET("/questions/:id", qH.GetQuestionByID)
 	v1.GET("/questions", qH.GetQuestionAll)
+	
+	v1.PUT("/answer", aH.PutAnswer)
   
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
@@ -40,5 +46,5 @@ func main() {
   
   // Handler
   func health(c echo.Context) error {
-	return c.String(http.StatusOK, "Health OK")
+	return c.String(http.StatusOK, "Health OK ")
   }
