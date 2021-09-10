@@ -32,6 +32,7 @@ func main() {
 
 	v1.POST("/questions", qH.PostQuestion)
 	v1.GET("/questions/:id", qH.GetQuestionByID)
+	v1.GET("/questions", qH.GetQuestionAll)
   
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))

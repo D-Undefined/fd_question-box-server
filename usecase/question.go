@@ -10,6 +10,7 @@ import (
 type QuestionUC interface {
 	Create(*entity.Question) (*entity.Question, error)
 	GetByID(int) (*entity.Question, error)
+	FindAll() (*[]entity.Question, error)
 }
 
 type questionUC struct {
@@ -32,3 +33,13 @@ func (uc *questionUC) Create(question *entity.Question) (*entity.Question, error
 func (uc *questionUC) GetByID(id int) (*entity.Question, error) {
 	return uc.questionRepo.GetByID(id)
 }
+
+func (uc *questionUC) FindAll() (*[]entity.Question, error) {
+	questions := new([]entity.Question)
+	err := uc.questionRepo.FindAll(questions)
+	if err != nil {
+		return nil, fmt.Errorf("questionRepo CreateQuestion: %v", err)
+	}
+	return questions, nil
+}
+

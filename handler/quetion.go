@@ -17,6 +17,7 @@ type questionHandler struct {
 type QuestionHandler interface {
 	PostQuestion(c echo.Context) error
 	GetQuestionByID(c echo.Context) error
+	GetQuestionAll(c echo.Context) error
 }
 
 func NewQuestionHandler(qU usecase.QuestionUC) QuestionHandler {
@@ -60,6 +61,16 @@ func (qH *questionHandler)GetQuestionByID(c echo.Context) (err error) {
 			CreatedAt: e.CreatedAt,
 		}
 		return c.JSON(http.StatusOK, dto)
+	}
+	return c.JSON(http.StatusOK, e)
+}
+
+// GET /questions 質問を全件取得
+
+func (qH *questionHandler)GetQuestionAll(c echo.Context) (err error) {
+	e, err := qH.questionUC.FindAll()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, APIError{Message: "サーバーでエラーが発生しました"})
 	}
 	return c.JSON(http.StatusOK, e)
 }

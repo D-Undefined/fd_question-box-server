@@ -36,3 +36,9 @@ func (qR *QuetionRepository) GetByID(id int) (*entity.Question, error) {
 	}
 	return dto, nil
 }
+
+// 質問を全件取得
+func (qR *QuetionRepository) FindAll(questions *[]entity.Question) error {
+	db := qR.SqlHandler.db
+	return db.Find(questions).Error
+}
