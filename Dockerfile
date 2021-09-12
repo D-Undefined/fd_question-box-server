@@ -14,6 +14,10 @@ RUN go mod download
 
 EXPOSE 8080
 
-RUN go get -u github.com/cosmtrek/air
+# RUN go get -u github.com/cosmtrek/air
 
 # CMD ["air"]
+COPY --from=builder /main .
+
+ENV PORT=${PORT}
+ENTRYPOINT ["/main"]

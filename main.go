@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/kazuki-komori/fd_question-box-server/database"
 	"github.com/kazuki-komori/fd_question-box-server/handler"
@@ -41,7 +42,7 @@ func main() {
 	v1.PUT("/answer", aH.PutAnswer)
   
 	// Start server
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
   }
   
   // Handler
