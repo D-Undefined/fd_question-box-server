@@ -29,7 +29,7 @@ func (qR *QuetionRepository) GetByID(id int) (*entity.Question, error) {
 	db := qR.SqlHandler.db
 	dto := new(entity.Question)
 	dto.ID = id
-	err := db.Preload("Answer").First(dto).Error
+	err := db.Preload("Answer").First(&dto).Error
 	if err != nil {
 		fmt.Printf("%v", err)
 		return nil, err
@@ -40,5 +40,5 @@ func (qR *QuetionRepository) GetByID(id int) (*entity.Question, error) {
 // 質問を全件取得
 func (qR *QuetionRepository) FindAll(questions *[]entity.Question) error {
 	db := qR.SqlHandler.db
-	return db.Find(questions).Error
+	return db.Preload("Answer").Find(&questions).Error
 }

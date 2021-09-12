@@ -46,5 +46,5 @@ func main() {
   
   // Handler
   func health(c echo.Context) error {
-	return c.String(http.StatusOK, "Health OK ")
+	return c.String(http.StatusOK, "Health OK")
   }

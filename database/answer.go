@@ -24,9 +24,7 @@ func (aR AnswerRepository) Create(answer *entity.Answer) error {
 	if err != nil {
 		return err
 	}
-	question := new(entity.Question)
-	question.ID = answer.QuestionID
-	err = db.Model(question).Update("isAnswered", true).Error
+	err = db.Model(&entity.Question{ID: answer.ID}).Update("isAnswered", true).Error
 	if err != nil {
 		return err
 	}

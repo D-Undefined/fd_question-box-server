@@ -5,7 +5,7 @@ type Question struct {
 	Content  string `json:"content"`
 	IsAnswerd  bool `json:"is_answerd"`
 	CreatedAt int64 `json:"created_at"`
-	Answer Answer `gorm:"foreignKey:QuestionID"`
+	Answer *Answer `gorm:"foreignKey:QuestionID"`
 }
 
 type QuestionDTO struct {
